@@ -1,3 +1,4 @@
+
 // StarCatcher Scripts for the game made by Soft Dev 2015
     // when the web page window loads up, the game scripts will be read
     var star = {
@@ -83,7 +84,13 @@ window.onload = function() {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d"),
     w = canvas.width = 800,
-    h = canvas.height = 500;
+    h = canvas.height = 700;
+    ctx.fillStyle= "rgba(250,0,0,.4)";
+    ctx.fillRect(50,50,w-100,h-100);
+    ctx.fillStyle="black";
+    ctx.font="30px Sans-Serif";
+    ctx.fillText("Capture the most stars to win!",w/4,h/4);
+    ctx.fillText("If you die, you automatically lose",w/4,h/2);
 
     //load images
     var background = new Image();
@@ -99,7 +106,7 @@ window.onload = function() {
     var p1Score=0, p2Score=0, p1Lives=3, p2Lives=3;
     // moving stars around the screen and update the players movement
     // our stars are created using a single array with a class of information
-    var starCount=100;
+    var starCount=50;
     var starArray=[];
 
     // Create an array of stars
@@ -220,8 +227,16 @@ window.onload = function() {
         if (40 in keysDown) { // P2 holding down (key: down arrow)
             p1y += 5;
         }
-        if (p1x>w-40) {p1x=-5}
-        if (p2x>w-40) {p2x=-5}
+        if (p1x>w-20) {p1x=w-30}
+        if (p1x<20) {p1x=30}
+        if (p1y<20) {p1y=30}
+        if (p1y>h-20) {p1y=h-30}
+
+        if (p2x>w-20) {p2x=w-30}
+        if (p2x<20) {p2x=30}
+        if (p2y<20) {p2y=30}
+        if (p2y>h-20) {p2y=h-30}
+        
         //draw images of ships
     ctx.drawImage(ship1, p1x, p1y, 40, 40);
     ctx.drawImage(ship2, p2x, p2y, 40, 40);
@@ -282,13 +297,13 @@ window.onload = function() {
         ctx.fillRect(50,50,w-100,h-100);
         ctx.fillStyle="black";
         ctx.font="30px Sans-Serif";
-        if (p1Score>p2Score){
-            ctx.fillText("Game over, Player one Wins",w/4,h/2);
+        if (wp==1){
+            ctx.fillText("Game over, Ted Cruz Wins",w/4,h/2);
         }
         if (wp==2){
-            ctx.fillText("Game over, Player two Wins",w/4,h/2);
-        }       
+            ctx.fillText("Game over, Donald Trump Wins",w/4,h/2);
+        }
         gameOn = false;
     }  // close endGame
     main();
-}                 
+}
